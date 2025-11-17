@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ravish Enterprise - AC Services</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      background-color: #f9f9f9;
+      color: #1e3a5f;
+      line-height: 1.6;
+      padding-left: 60px; /* space for menu button and side nav */
+    }
+    header {
+      background: linear-gradient(to right, #1e3a5f, #5c87b2);
+      color: #fff;
+      padding: 4rem 2rem 2rem 2rem;
+      text-align: center;
+      background-image: url("https://images.unsplash.com/photo-1598300053284-7e0d53b92c72");
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      scroll-margin-top: 80px; /* offset anchor for fixed menu */
+    }
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(30, 58, 95, 0.7);
+      z-index: 0;
+    }
+    header h1,
+    header p {
+      position: relative;
+      z-index: 1;
+    }
+    .container {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    section {
+      background-color: #fff;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      scroll-margin-top: 80px; /* offset anchor for fixed menu */
+    }
+    h2 {
+      color: #1e3a5f;
+      margin-bottom: 1rem;
+    }
+    .service-list,
+    .pricing-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      background: #f0f8ff;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+      text-align: center;
+    }
+    iframe {
+      width: 100%;
+      height: 1367px;
+      border: none;
+      border-radius: 0.75rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #1e3a5f;
+      color: white;
+      /* adjusted padding for menu */
+      margin-left: 60px;
+    }
+    /* Menu Button */
+    #menuToggle {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      z-index: 1100;
+      cursor: pointer;
+      width: 40px;
+      height: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: white;
+      padding: 5px;
+      border-radius: 5px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    }
+    #menuToggle span {
+      display: block;
+      height: 4px;
+      background: #1e3a5f;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    /* Side Nav */
+    #sideNav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 60px;
+      height: 100%;
+      background: #1e3a5f;
+      padding-top: 60px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.15);
+      overflow-x: hidden;
+      transition: width 0.3s ease;
+      z-index: 1050;
+    }
+    #sideNav.expanded {
+      width: 200px;
+    }
+    #sideNav ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 0;
+    }
+    #sideNav ul li {
+      margin: 1.5rem 0;
+    }
+    #sideNav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      display: block;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    #sideNav.expanded ul li a {
+      opacity: 1;
+    }
+    #sideNav ul li a:hover,
+    #sideNav ul li a:focus {
+      background-color: #3f6c9b;
+      outline: none;
+    }
+    /* Animate menu icon when active */
+    #menuToggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(7px, 7px);
+    }
+    #menuToggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+    #menuToggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+    /* Responsive margin adjustments */
+    @media (max-width: 600px) {
+      body {
+        padding-left: 0;
+      }
+      #sideNav,
+      #sideNav.expanded {
+        width: 100%;
+        height: auto;
+        position: relative;
+        box-shadow: none;
+      }
+      #sideNav ul {
+        display: flex;
+        justify-content: space-around;
+      }
+      #sideNav ul li {
+        margin: 0.5rem 0;
+      }
+      #sideNav ul li a {
+        opacity: 1 !important;
+      }
+      #menuToggle {
+        display: none;
+      }
+      header,
+      .container,
+      footer {
+        margin-left: 0 !important;
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="menuToggle" aria-label="Toggle menu" tabindex="0">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <nav id="sideNav" aria-label="Site navigation" tabindex="-1">
+    <ul>
+      <li><a href="#homeSection" tabindex="0" onclick="closeMenu()">Home</a></li>
+      <li><a href="#servicesSection" tabindex="0" onclick="closeMenu()">Our Services</a></li>
+      <li><a href="#pricingSection" tabindex="0" onclick="closeMenu()">Pricing</a></li>
+      <li><a href="#aboutSection" tabindex="0" onclick="closeMenu()">About Us</a></li>
+      <li><a href="#bookServiceSection" tabindex="0" onclick="closeMenu()">Book a Service</a></li>
+      <li><a href="#contactSection" tabindex="0" onclick="closeMenu()">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header id="homeSection">
+    <h1>Ravish Enterprise</h1>
+    <p>Expert AC Servicing, Repair & Installation in Mumbai / Mira Bhayandar</p>
+  </header>
+
+  <div class="container">
+    <section id="servicesSection" tabindex="-1">
+      <h2>Our Services</h2>
+      <div class="service-list">
+        <div class="card">AC Servicing</div>
+        <div class="card">Gas Charging</div>
+        <div class="card">Repair</div>
+        <div class="card">Uninstallation</div>
+        <div class="card">Installation</div>
+        <div class="card">Other Services</div>
+      </div>
+    </section>
+
+    <section id="pricingSection" tabindex="-1">
+      <h2>Pricing</h2>
+      <div class="pricing-list">
+        <div class="card">AC Servicing – ₹400/800</div>
+        <div class="card">Gas Charging – ₹2500</div>
+        <div class="card">Repair – Based on Fault</div>
+        <div class="card">Uninstallation – ₹700</div>
+        <div class="card">Installation – ₹1500</div>
+      </div>
+    </section>
+
+    <section id="aboutSection" tabindex="-1">
+      <h2>About Us</h2>
+      <p>
+        Ravish Enterprise has been proudly serving customers for over 15 years.
+        With 1000+ happy customers and experience working with top brands like LG,
+        we bring expertise and reliability to every service call.
+      </p>
+    </section>
+
+    <section id="bookServiceSection" tabindex="-1">
+      <h2>Book a Service</h2>
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLSfhZaJk46YPNR1d7bC8QYC_kABbQfzDIalSv3IvhqRmKpAIrw/viewform?embedded=true"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+        loading="lazy"
+        title="Book a Service Form"
+      ></iframe>
+    </section>
+
+    <section id="contactSection" tabindex="-1">
+      <h2>Contact</h2>
+      <p>Phone: 9594467193 / 9892594602</p>
+      <p>Email: ravishenterprise29@gmail.com</p>
+    </section>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Ravish Enterprise</p>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const sideNav = document.getElementById("sideNav");
+
+    function toggleMenu() {
+      menuToggle.classList.toggle("active");
+      sideNav.classList.toggle("expanded");
+    }
+
+    function closeMenu() {
+      menuToggle.classList.remove("active");
+      sideNav.classList.remove("expanded");
+    }
+
+    menuToggle.addEventListener("click", toggleMenu);
+    menuToggle.addEventListener("keydown", (e) => {
+      if (e.key === " " || e.key === "Enter") {
+        e.preventDefault();
+        toggleMenu();
+      }
+    });
+
+    // Close menu after link click handled inline with onclick="closeMenu()"
+  </script>
+</body>
+</html>
